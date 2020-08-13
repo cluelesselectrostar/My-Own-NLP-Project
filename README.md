@@ -1,24 +1,13 @@
-<head>
-<style>
-p.ex1 {
-  font-size: 30px;
-}
-p.ex2 {
-  font-size: 50px;
-}
-</style>
-</head>
-
-<p class="ex1"> Analysing Charlie and the Chocolate Factory 🍫 </p>
+Analysing "Charlie and the Chocolate Factory 🍫"
 
 - [1. Frequently used terms](#1-frequently-used-terms)
-- [2. Packages (we love packages in Python!)](#2-packages-we-love-packages-in-python)
+- [2. Pythonists are obsessed with packages!](#2-pythonists-are-obsessed-with-packages)
   - [2.1. Pulling data](#21-pulling-data)
   - [2.2. Storing data](#22-storing-data)
   - [2.3. Linguistic tools](#23-linguistic-tools)
   - [2.4. Mathematical tools](#24-mathematical-tools)
 - [3. Extensions](#3-extensions)
-  - [3.1. TD-IDF or Term Frequency Inverse Data Frequency](#31-td-idf-or-term-frequency-inverse-data-frequency)
+  - [3.1. TF-IDF or Term Frequency Inverse Data Frequency](#31-tf-idf-or-term-frequency-inverse-data-frequency)
   - [3.2. Text normalisation: Stemming and lemmatisation](#32-text-normalisation-stemming-and-lemmatisation)
     - [3.2.1. Stemming](#321-stemming)
     - [3.2.2. Lematisation](#322-lematisation)
@@ -26,6 +15,15 @@ p.ex2 {
   - [3.4. Naive Bayes Classification using scikit-learn](#34-naive-bayes-classification-using-scikit-learn)
   - [3.5. More ideas!](#35-more-ideas)
 - [4. Outlook](#4-outlook)
+  - [4.1. Data Cleaning](#41-data-cleaning)
+    - [Outline for data cleaning](#outline-for-data-cleaning)
+  - [4.2. Exploratory Data Analysis (EDA)](#42-exploratory-data-analysis-eda)
+    - [Procedures for EDA](#procedures-for-eda)
+  - [4.3. Sentiment Analysis](#43-sentiment-analysis)
+    - [Introducing TextBlob for Sentiment Analysis](#introducing-textblob-for-sentiment-analysis)
+  - [4.4. Topic Modelling](#44-topic-modelling)
+    - [Gensim to the rescue!](#gensim-to-the-rescue)
+  - [4.5. Text Generation](#45-text-generation)
 - [5. References](#5-references)
   
 This project is based on the "Natural Language Processing in Python Tutorial" given by PyOhio. I really don't have any experience with any field in data science, let alone natural language processing (or let alone Python lol). The concepts covered in the tutorial were quite new and interesting to me, so I decided to conduct a project on my own and to further dive into some concepts proposed in the tutorial. 
@@ -40,7 +38,7 @@ This project is based on the "Natural Language Processing in Python Tutorial" gi
 
 > Stems/ Roots/ Lemmas
 
-# 2. Packages (we love packages in Python!)
+# 2. Pythonists are obsessed with packages!
 
 ## 2.1. Pulling data
 1. bs4 (Beautiful soup) - parses data from HTML and XMLs; probably only useful if I'm scraping information from sites.
@@ -71,7 +69,9 @@ This project is based on the "Natural Language Processing in Python Tutorial" gi
 
 # 3. Extensions
 
-## 3.1. TD-IDF or Term Frequency Inverse Data Frequency
+These are slightly more advanced techniques that may be considered throughout my project.
+
+## 3.1. TF-IDF or Term Frequency Inverse Data Frequency
 - Term frequency (tf): frequency of word ( in each document) in the corpus. Ratio of term frequency to total word count.  
   $tf_{i,j} = \frac{n_{i,j}}{\sum_{k} n_{i,j}}$
 - Inverse Data Frequency (idf):  used to calculate the weight of rare words across (all documents in) the corpus. Words that rarely occur in the corpus have a high IDF score.  
@@ -156,12 +156,11 @@ You need to provide the context in which you want to lemmatize, that is the part
 ## 3.3. spaCy
 spaCy offers various "industrial-strength" features for natural language processing Python:
 - Non-destructive tokenization, sentence segmentation
-- Named entity recoognition and entity linking
-- Statistical models and pretrained word vectors
+- Named entity recognition and entity linking
 - Tag with parts of speech
 - Labelled dependency parsing: extracting a dependency parse of a sentence that represents its grammatical structure and defines the relationships between “head” words and words, which modify those heads. For example, identifying the subjects, conjucatons, modifications, case, determinant
 - Neural networking
-- Word vectors - provide information about definitions of words; available in a lookup table, and each word only has one representation regardless of context
+- Statistical models and Pretrained word vectors - provide information about definitions of words; available in a lookup table, and each word only has one representation regardless of context
 - Language model pretraining - contextualised word representations- `spacy pretrain` trains a language model to predict each word's word vector based on surrounding words.
   - Rule based training
   - Bootstrap first set of training example texts
@@ -210,11 +209,109 @@ Step 4: See which class has a higher probability, given the input belongs to the
 
 
 # 4. Outlook
-1. Data cleaning: 
-    - Data cleaning helps avoid "garbage in , garbage out" -- we do not want to feed meaningless data into a model which will probably return us with more meaningless junk.
-    - This time I will skip the scraping part that data scientists normally do. This allows the content to be updated over time, but to be fair the content is pretty static anyways so I don't really see the point of doing so. In addition, I imagine there would be quite a number of problems if the layout of the site changes.
-    - Input: a simple text file with metadata removed. Headers and page numbers are kept though.
-    - Text pre-processing techniques: 
+
+This outlook will be continuously updated as I progress through various stages of the project. I imagine I would frequently return to the exploratory data analysis and sentiment analysis stages so as to increase the precision of topic-modelling and to improve the correctedness of sentences randomly generated. If time permits, I will also implement techniques mentioned in the "extensions" section.
+
+## 4.1. Data Cleaning
+> Data cleaning helps avoid "garbage in , garbage out" -- we do not want to feed meaningless data into a model which will probably return us with more meaningless junk.
+
+This time I will skip the scraping part that data scientists normally do. This allows the content to be updated over time, but to be fair the content is pretty static anyways so I don't really see the point of doing so. In addition, I imagine there would be quite a number of problems if the layout of the site changes.
+
+### Outline for data cleaning
+- Input: a simple text file with metadata removed. Headers and page numbers are kept though.
+- Common Pre-processing/ cleaning procedures
+  - All lower case
+  - Remove punctuation, symbols and numerical values
+  - Remove common non-sensical text (such as line breakers `\n`)
+  - Tokenize text: split sentences into individual words (in preparation for DTM)
+  - Remove stop-words
+  - Using NLTK perform stemming and lemmatisation for words in the DTM, to reduce the number of inflicted words.
+  - Parts of speech tagging
+  - DTM for bi-grams/ tri-grams (phrases like thank you)
+- Output
+  - Corpus: not much different from the actual input since there is only one file here....... but with all the data cleaned up.
+  - Document Term matrix: a matrix of word counts in the entire corpus.
+
+SpaCy can also perform these NLTK techniques as well, with a greater degree of efficiency. The extra features might be overkill for the time being though.
+
+
+## 4.2. Exploratory Data Analysis (EDA)
+
+Before applying any fancy algorithms, the next step is to simply explore whether the processed corpuses and DTMs make sense.
+
+When working with numerical data, some EDA techniques we can use include finding the mean, median or mode as well as the distribution of a data set. 
+
+For text, we are going to find some more **obvious** patterns with EDA before identifying the hidden patterns with machines learning (ML) techniques. Relatively obious things are:
+
+1. **Most common words** - find these and create word clouds
+2. **Size of vocabulary** - look number of unique words
+
+### Procedures for EDA
+1. With the DTM from the previous stage, sort into columns according to ascending order in value (of occurence)
+2. Aggregate (or filter) data - select columns with the largest values.
+3. Visualise top words - word clouds? bar charts?
+4. Insights - a written comment/ description of the key takeaways.
+5. Probably also try using TF-IDF (Term frequency - inverse data frequency) for better understanding the "uniqueness" or the "value" of the the vocabulary in the text.
+
+
+## 4.3. Sentiment Analysis
+
+**Input:** Both the corpus and document matrix generated will not be useful because they are in a bag of words format. But in sentiment analysis, order does matter, so the original text with non-sensical text removed should be analysed. (e.g. "great" vs "not great")
+
+**Output:** Sentiment score (how positive/ negative they are) and a subjective score (how opionated they are).
+
+### Introducing TextBlob for Sentiment Analysis
+1. **TextBlob Module:** Linguistic researchers have labeled the sentiment of words based on their domain expertise. Sentiment of words can vary based on where it is in a sentence. The TextBlob module allows us to take advantage of these labels.
+2. **Sentiment Labels:** Each word in a corpus is labeled in terms of polarity and subjectivity (there are more labels as well, but we're going to ignore them for now). A corpus' sentiment is the average of these.
+   * **Polarity**: How positive or negative a word is. -1 is very negative. +1 is very positive.
+   * **Subjectivity**: How subjective, or opinionated a word is. 0 is fact. +1 is very much an opinion.
+3. Can explpore change in sentiment over time (how positive or negative things get at different parts of the text)
+
+More information on the [sentiment function](https://planspace.org/20150607-textblob_sentiment/).
+
+TextBlob finds all the words and phrases that it can assign a polarity and subjectivity to, and takes the average. Not necessarily sophisticated, but it is a good rules-based implementation. Naive Bayes is a good statistical method but it assumes that all the variables are independent (?).
+
+
+## 4.4. Topic Modelling
+
+The aim of topic modelling is to find the various topics that are present in the corpus. One sepcific topic modelling technique is calledd Latent Dirichlet Allocation (LDA), which is specifically designed for NLP. This part is the most difficult in the sense that the results obtained can be quite arbitrary depending on the parameters passed in.
+
+> LDA (hidden, type of probability distribution): "This document contains a probability distribution of these topics. A topic is a probability distribution of a certain subset of words."
+
+**Inputs:** A document-term matrix - order doesn't matter, and number of topics to be generated
+
+**Output:** A list of themes, to be interpreted by myself - does it make sense? Should I try altering the number of topics, the document-term matrix itself (only filtering nouns or adjectives), or the model for distribution?
+
+### Gensim to the rescue!
+- Goal : want LDA to learn the topic mix in each document, and the word mix in each topic
+- Input: Document term matrix, number of topics, number of iterations
+    1. Choose the number of topics that you identify in your corpus
+    2. Randomly assign each word in each document to one of the n topics.
+    3. Go through every word and its topic assignment in each document. Look at:
+        1. How often the topic occurs in the document; and,
+        2. How often the word occurs in the topic overall. 
+- Based on this information, it assigns the word a new topic. It goes through multiple iterations, and after several iterations that make sense and can be interpreted. It takes a while to find the best word distribution for each topic and best topic distribution for each document
+- Output: top words in each topic
+- This is a probabilistic approach to topic modelling. There are matrix factorisation techniques (latent semantic indexing, negative matrix factorisation) that are are better for numbers. LDA is essentially singular value decomposition for text.
+
+## 4.5. Text Generation
+
+- **Input:** a corpus, order matters
+- **Output:** generate random sentences in the style of the author..... sounds pretty far-fetched?
+
+This procedure completing text generation is relatively easy, but the quality is certainly correlated with the precision of topics interpreted in the previous stage, as well as the quality of initial data cleaning.
+
+> Markov chains represent how systems change over time. The main concept behind Markov chains are that they are memoryless, meaning that the next state of a process only depends on the previous state.
+
+From a dictionary perspective of the DTM, this means that the keys are the current words, and the values are simply list of words for the next state, or  pointers to the list of next words.
+
+Markov chains can be used for very basic text generation. Think about every word in a corpus as a state. We can make a simple assumption that the next word is only dependent on the previous word - which is the basic assumption of a Markov chain.
+
+**Things to learn**:
+- Deep learning
+- Long short-term memory (LSTM)
+
+Both techniques acocount for the previous words, but also words before previous words, and the words that have already been generated.
 
 # 5. References
 1. [More on TF-IDF](https://www.freecodecamp.org/news/how-to-process-textual-data-using-tf-idf-in-python-cd2bbc0a94a3/)
