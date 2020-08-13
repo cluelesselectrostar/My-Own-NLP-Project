@@ -16,13 +16,13 @@ Analysing "Charlie and the Chocolate Factory 🍫"
   - [3.5. More ideas!](#35-more-ideas)
 - [4. Outlook](#4-outlook)
   - [4.1. Data Cleaning](#41-data-cleaning)
-    - [Outline for data cleaning](#outline-for-data-cleaning)
+    - [4.1.1. Outline for data cleaning](#411-outline-for-data-cleaning)
   - [4.2. Exploratory Data Analysis (EDA)](#42-exploratory-data-analysis-eda)
-    - [Procedures for EDA](#procedures-for-eda)
+    - [4.2.1. Procedures for EDA](#421-procedures-for-eda)
   - [4.3. Sentiment Analysis](#43-sentiment-analysis)
-    - [Introducing TextBlob for Sentiment Analysis](#introducing-textblob-for-sentiment-analysis)
+    - [4.3.1. Introducing TextBlob for Sentiment Analysis](#431-introducing-textblob-for-sentiment-analysis)
   - [4.4. Topic Modelling](#44-topic-modelling)
-    - [Gensim to the rescue!](#gensim-to-the-rescue)
+    - [4.4.1. Gensim to the rescue!](#441-gensim-to-the-rescue)
   - [4.5. Text Generation](#45-text-generation)
 - [5. References](#5-references)
   
@@ -217,7 +217,7 @@ This outlook will be continuously updated as I progress through various stages o
 
 This time I will skip the scraping part that data scientists normally do. This allows the content to be updated over time, but to be fair the content is pretty static anyways so I don't really see the point of doing so. In addition, I imagine there would be quite a number of problems if the layout of the site changes.
 
-### Outline for data cleaning
+### 4.1.1. Outline for data cleaning
 - Input: a simple text file with metadata removed. Headers and page numbers are kept though.
 - Common Pre-processing/ cleaning procedures
   - All lower case
@@ -246,7 +246,7 @@ For text, we are going to find some more **obvious** patterns with EDA before id
 1. **Most common words** - find these and create word clouds
 2. **Size of vocabulary** - look number of unique words
 
-### Procedures for EDA
+### 4.2.1. Procedures for EDA
 1. With the DTM from the previous stage, sort into columns according to ascending order in value (of occurence)
 2. Aggregate (or filter) data - select columns with the largest values.
 3. Visualise top words - word clouds? bar charts?
@@ -260,7 +260,7 @@ For text, we are going to find some more **obvious** patterns with EDA before id
 
 **Output:** Sentiment score (how positive/ negative they are) and a subjective score (how opionated they are).
 
-### Introducing TextBlob for Sentiment Analysis
+### 4.3.1. Introducing TextBlob for Sentiment Analysis
 1. **TextBlob Module:** Linguistic researchers have labeled the sentiment of words based on their domain expertise. Sentiment of words can vary based on where it is in a sentence. The TextBlob module allows us to take advantage of these labels.
 2. **Sentiment Labels:** Each word in a corpus is labeled in terms of polarity and subjectivity (there are more labels as well, but we're going to ignore them for now). A corpus' sentiment is the average of these.
    * **Polarity**: How positive or negative a word is. -1 is very negative. +1 is very positive.
@@ -282,7 +282,7 @@ The aim of topic modelling is to find the various topics that are present in the
 
 **Output:** A list of themes, to be interpreted by myself - does it make sense? Should I try altering the number of topics, the document-term matrix itself (only filtering nouns or adjectives), or the model for distribution?
 
-### Gensim to the rescue!
+### 4.4.1. Gensim to the rescue!
 - Goal : want LDA to learn the topic mix in each document, and the word mix in each topic
 - Input: Document term matrix, number of topics, number of iterations
     1. Choose the number of topics that you identify in your corpus
