@@ -319,3 +319,5 @@ Both techniques acocount for the previous words, but also words before previous 
 3. [Spacy Tutorial](https://course.spacy.io/en/)
 4. [Naive Bayes Classification](https://www.datacamp.com/community/tutorials/naive-bayes-scikit-learn)
 5. [Introduction to Deep Learning](https://campus.datacamp.com/courses/introduction-to-deep-learning-in-python/basics-of-deep-learning-and-neural-networks?ex=1)
+6. [NLP on NLTK, SpaCy as TextBlob](https://www.analyticsvidhya.com/blog/2019/08/how-to-remove-stopwords-text-normalization-nltk-spacy-gensim-python/)
+7. [POS Tagging and Named Entity Recognition on SpaCy](https://stackabuse.com/python-for-nlp-parts-of-speech-tagging-and-named-entity-recognition/)
