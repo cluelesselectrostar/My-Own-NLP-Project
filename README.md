@@ -8,15 +8,15 @@ Analysing "Charlie and the Chocolate Factory 🍫"
   - [2.4. Mathematical tools](#24-mathematical-tools)
 - [3. Extensions](#3-extensions)
   - [3.1. TF-IDF or Term Frequency Inverse Data Frequency](#31-tf-idf-or-term-frequency-inverse-data-frequency)
-  - [3.2. Text normalisation: Stemming and lemmatisation](#32-text-normalisation-stemming-and-lemmatisation)
-    - [3.2.1. Stemming](#321-stemming)
-    - [3.2.2. Lematisation](#322-lematisation)
-  - [3.3. spaCy](#33-spacy)
+  - [3.2. Text normalisation: Stemming and lemmatisation (✔️)](#32-text-normalisation-stemming-and-lemmatisation-️)
+    - [3.2.1. Stemming (✔️)](#321-stemming-️)
+    - [3.2.2. Lematisation (✔️)](#322-lematisation-️)
+  - [3.3. spaCy (✔️)](#33-spacy-️)
   - [3.4. Naive Bayes Classification using scikit-learn](#34-naive-bayes-classification-using-scikit-learn)
   - [3.5. More ideas!](#35-more-ideas)
 - [4. Outlook](#4-outlook)
   - [4.1. Data Cleaning](#41-data-cleaning)
-    - [4.1.1. Outline for data cleaning](#411-outline-for-data-cleaning)
+    - [4.1.1. Outline for data cleaning (✔️)](#411-outline-for-data-cleaning-️)
   - [4.2. Exploratory Data Analysis (EDA)](#42-exploratory-data-analysis-eda)
     - [4.2.1. Procedures for EDA](#421-procedures-for-eda)
   - [4.3. Sentiment Analysis](#43-sentiment-analysis)
@@ -86,7 +86,7 @@ $w_{i,j} = tf_{i,j} \times idf(w)$
 
 > Implementation suggestion: `TfidFVectorizer` from `sklearn.feature_extraction.text`.
 
-## 3.2. Text normalisation: Stemming and lemmatisation
+## 3.2. Text normalisation: Stemming and lemmatisation (✔️)
 
 When a language contains words that are derived from another (root) word , the changes are called **Inflected Language**. For example, modifications are made to reflect tense, case, aspect, person, number, gender and mood or position in speech. For example, googling fish (I use DuckDuckGo) will also result in fishes, fishing as fish is the stem of both words.
 
@@ -94,7 +94,7 @@ Stemming and lemmatisation both helps us to achieve or obtain the root form of i
 
 For English, there are 2 different stemmers available for `nltk`, including  PorterStammer or LancasterStammer.
 
-### 3.2.1. Stemming
+### 3.2.1. Stemming (✔️)
 > Stemming is the process of reducing inflection in words to their root forms such as mapping a group of words to the same stem even if the stem itself is not a valid word in the Language.
 
 Stem (or root) is the part of the word to which you add inflectional affixes such as (-ed,-ize, -s,-de,mis). So stemming a word may result in words that do not exist. Stems are created by removing the inflections used with a word.
@@ -113,7 +113,7 @@ Stem (or root) is the part of the word to which you add inflectional affixes suc
 
 In gneral, PortStemmer is simpler and faster as it applies a fixed set og rules in phases to generate stems. `SnowballStemmers` can bs used to create non-English stemmers. In comparison, the LancasterStemmer applies an iterative algorithm, by saving  the last character of the word and applying changes according to 120 rules; it is prone to over-stemming, and may lead to stem words that are not linguistically correct.
 
-### 3.2.2. Lematisation
+### 3.2.2. Lematisation (✔️)
 
 > Lemmatization reduces the inflected words properly, ensuring that the root word belongs to the language. In Lemmatization the root word is called a Lemma. A lemma (plural lemmas or lemmata) is the canonical form, dictionary form, or citation form of a set of words.
 
@@ -153,7 +153,7 @@ You need to provide the context in which you want to lemmatize, that is the part
 - Check out NLTK Text Corpora for free corpuses derived from e-books, web and news documents, by `nltk.download()`
 - Stop-words removal (and union your own list of stop-words)
 
-## 3.3. spaCy
+## 3.3. spaCy (✔️)
 spaCy offers various "industrial-strength" features for natural language processing Python:
 - Non-destructive tokenization, sentence segmentation
 - Named entity recognition and entity linking
@@ -212,12 +212,12 @@ Step 4: See which class has a higher probability, given the input belongs to the
 
 This outlook will be continuously updated as I progress through various stages of the project. I imagine I would frequently return to the exploratory data analysis and sentiment analysis stages so as to increase the precision of topic-modelling and to improve the correctedness of sentences randomly generated. If time permits, I will also implement techniques mentioned in the "extensions" section.
 
-## 4.1. Data Cleaning
+## 4.1. Data Cleaning 
 > Data cleaning helps avoid "garbage in , garbage out" -- we do not want to feed meaningless data into a model which will probably return us with more meaningless junk.
 
 This time I will skip the scraping part that data scientists normally do. This allows the content to be updated over time, but to be fair the content is pretty static anyways so I don't really see the point of doing so. In addition, I imagine there would be quite a number of problems if the layout of the site changes.
 
-### 4.1.1. Outline for data cleaning
+### 4.1.1. Outline for data cleaning (✔️)
 - Input: a simple text file with metadata removed. Headers and page numbers are kept though.
 - Common Pre-processing/ cleaning procedures
   - All lower case
