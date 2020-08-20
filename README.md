@@ -189,7 +189,7 @@ Step 2: Find Likelihood probability with each attribute for each class
 Step 3: Put these value in Bayes Formula and calculate posterior probability.  
 Step 4: See which class has a higher probability, given the input belongs to the higher probability class.  
 
-![naivebayes](naivebayes.bmp)
+![naivebayes](naive_bayes.bmp)
 
 > Implementation: `from sklearn.naive_bayes import GaussianNB`
 
