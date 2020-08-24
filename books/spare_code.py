@@ -18,3 +18,16 @@ entity_dtm = entity_dtm.transpose()
 
 # filter
 entity_dtm
+
+
+'''
+texts = [
+    "Penny bought bright blue fishes.",
+    "Penny bought bright blue and orange fish.",
+    "The cat ate a fish at the store.",
+    "Penny went to the store. Penny ate a bug. Penny saw a fish.",
+    "It meowed once at the bug, it is still meowing at the bug and the fish",
+    "The cat is at the fish store. The cat is orange. The cat is meowing at the fish.",
+    "Penny is a fish"
+]
+'''
